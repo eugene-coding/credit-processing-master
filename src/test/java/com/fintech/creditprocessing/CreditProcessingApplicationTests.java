@@ -19,7 +19,7 @@ class CreditProcessingApplicationTests {
     ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
     @Test
-    public void areThereTwoTariffs() throws IOException {
+    public void areThereThreeTariffs() throws IOException {
        var tariffs = TariffService.getAll();
 
        assertEquals(3, tariffs.length);
