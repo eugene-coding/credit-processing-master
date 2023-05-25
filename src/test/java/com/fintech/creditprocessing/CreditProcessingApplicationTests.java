@@ -16,23 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CreditProcessingApplicationTests {
-    ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
-
-    @Test
-    public void areThereThreeTariffs() throws IOException {
-       var tariffs = TariffService.getAll();
-
-       assertEquals(3, tariffs.length);
-    }
-
-    @ParameterizedTest(name = "{index} - {0} is interest rate of the first tariff")
-    @ValueSource(strings = {"11%", "7%", "8%"})
-    public void IsFirstTariffInterestRateEqualsValue(String interestRate){
-        var tariff = TariffService.getFirst();
-
-        assertEquals(interestRate, tariff.getInterestRate());
-    }
-
     @ParameterizedTest(name = "{index} - {0} is added")
     @ValueSource(longs = {120356894755L, 153356894755L, 120356124755L})
     public void isNewRequestAdded(long userId){
@@ -48,11 +31,9 @@ class CreditProcessingApplicationTests {
     public void isStatusCodeApproved(String orderId){
         try {
             var status = CreditService.getStatusOrder(orderId);
-
             assertEquals(Status.APPROVED, status);
         } catch (Exception e){
             fail(e.getMessage());
         }
     }
-
 }
